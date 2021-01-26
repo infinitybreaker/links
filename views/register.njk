@@ -1,0 +1,58 @@
+<html>
+
+  <head>
+    
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+
+        <input class="input is-large" id='mail' placeholder="Email" autofocus="">
+        <input class="input is-large" id='uname' placeholder="Username" autofocus="">
+        <input class="input is-large" id='org' placeholder="Organization Name" autofocus="">
+        <input class="input is-large" id='pass'  placeholder="Password">
+        
+
+<div class="select">
+  <select id="plan">
+    
+    <option value="free">Free</option>
+    <option value="basic">Basic</option>
+    <option value="enterprise">Enterprise</option>
+  </select>
+</div>
+
+    <button class="button" id="submit">Button</button>
+
+    <p id="test"></p>
+
+  </body>
+
+  <script>
+    $("#submit").click(function () {
+
+      $.post("/users/register", {
+          email: $('#mail').val(),
+          password: $('#pass').val(),
+          username:$('#uname').val(),
+          orgName:$('#org').val(),
+          activePlan:$('#plan').val(),
+
+
+
+          
+        }, function (data, status) {
+
+          $('#test').text('working')
+
+        })
+        .fail((data) => {
+          $('#test').text('not working')
+
+        });
+    });
+  </script>
+</html>

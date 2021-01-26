@@ -1,21 +1,34 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var app = express();
+const axios = require('axios').default;
+
+const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const app = express();
+const dotenv = require('dotenv').config();
+
+const DB_URL = process.env.DB_URL
 const nunjucks = require('nunjucks');
+
 nunjucks.configure('views', {
   autoescape: true,
   express: app
 });
 
-app.set('view engine', 'njk');
 
-app.use(logger('dev'));
+const conn = mongoose.connect(DB_URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+}).then((client) => {
+    console.log('Connected to Database')
+
+}).catch(error => { console.log(error) })
+
+app.set('view engine', 'njk');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

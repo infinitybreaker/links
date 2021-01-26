@@ -1,0 +1,41 @@
+<html>
+
+  <head>
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+
+
+<input class="input is-large" id='submitLPText' placeholder="Landing Page">
+
+
+<input class="input is-large" id='dlink' placeholder="Default Link">
+<input class="input is-large" id='CCode' placeholder="Country Code (Name displayed)">
+<input class="input is-large" id='lps' placeholder="Landing Page">
+<button class="button" id="submit">Submit LandingPage</button> 
+
+<button class="button" id="submitLP">Submit query</button> 
+
+  </body>
+  <script>
+     $("#submit").click(function(){
+     let rotator = { $("#CCode").val():$('#dlink').val()}
+     let lps = $('#lps').val()
+      
+  $.post("/users/new-campaign/?user=testqwe", {
+  rotator:rotator,
+  lps:lps
+  },
+  function(data, status){
+    alert("Data: " + data + "\nStatus: " + status);
+  });
+});
+</script> 
+
+ 
+</html>

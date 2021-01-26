@@ -1,0 +1,41 @@
+<html>
+
+  <head>
+    <title>Express</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+
+        <input class="input is-large" id='mail' placeholder="Email" autofocus="">
+
+        <input class="input is-large" id='pass'  placeholder="Password">
+
+
+    <button class="button" id="submit">Button</button>
+
+    <p id="test"></p>
+
+  </body>
+
+  <script>
+    $("#submit").click(function () {
+
+      $
+        .post("/users/login", {
+          email: $('#mail').val(),
+          password: $('#pass').val()
+        }, function (data, status) {
+
+          window.location.href="/users/dashboard"
+        })
+        .fail((data) => {
+          $('#test').text('not working')
+
+        });
+    });
+  </script>
+</html>
